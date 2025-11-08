@@ -23,12 +23,11 @@ from pathlib import Path
 
 try:
     import yfinance as yf
-except ImportError:
-    import subprocess
-    import sys
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "yfinance", "-q"])
-    import yfinance as yf
-
+except ImportError as e:
+    raise ImportError(
+        "yfinance is required for stock_price_downloader.py. "
+        "Install it with `pip install yfinance`."
+    ) from e
 
 def get_data_path():
     """Get the data/raw directory path, creating it if needed."""
